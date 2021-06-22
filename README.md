@@ -1,5 +1,4 @@
 # dmca.gripe-upload-api
-___
 
 Small tool to upload files using the website [dmca.gripe](https://dmca.gripe/).
 
