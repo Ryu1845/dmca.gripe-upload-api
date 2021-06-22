@@ -1,35 +1,35 @@
 import requests
-import sys
+from sys import argv
 
 
 class UploadAPI:
-    def __init__(self, api_url, file_path):
+    def __init__(self, api_url: str):
         """
         :param api_url:
-        :param file_path:
         """
         self.api_url = api_url
-        self.file_path = file_path
 
-    def get_data(self):
-        byte_file = open(self.file_path, "rb")
+    def get_data(self, file_path: str) -> dict:
+        byte_file = open(file_path, "rb")
         return_data = {'files[]': byte_file}
         return return_data
 
-    def make_request(self):
-        response = requests.post(self.api_url, files=self.get_data(), headers=self.get_header())
-        return response.text
-
-    def get_header(self):
-        headers = ""
-        if sys.argv.count("-auth") == 1:
-                headers = {
-                    'token': ''
-                }
+    def get_header(self) -> dict:
+        headers = {}
+        if argv.count("-auth") == 1:
+            headers['token'] = ''
         return headers
+
+    def upload(self, file_path: str) -> str:
+        response = requests.post(
+            self.api_url,
+            files=self.get_data(file_path),
+            headers=self.get_header()
+        )
+        return response.text
 
 
 if __name__ == '__main__':
-    file_path = sys.argv[sys.argv.index("-file") + 1]
-    upload = UploadAPI("https://dmca.gripe/api/upload", file_path)
-    print(upload.make_request())
+    file_path = argv[argv.index("-file") + 1]
+    upload = UploadAPI("https://dmca.gripe/api/upload")
+    print(upload.upload(file_path))
