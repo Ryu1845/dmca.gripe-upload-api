@@ -9,6 +9,9 @@ class UploadAPI:
         """
         self.api_url = api_url
 
+    def __repr__(self):
+        return f'<Upload API for {self.api_url}>'
+
     def get_data(self, file_path: str) -> dict:
         byte_file = open(file_path, "rb")
         return_data = {'files[]': byte_file}
