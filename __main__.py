@@ -41,5 +41,5 @@ if __name__ == '__main__':
     upload = UploadAPI("https://dmca.gripe/api/upload", file_path)
     print(upload.upload())
     file_path2 = 'placeholder'
-    upload(file_path2)
-    print(upload.upload())
+    # upload(file_path2)
+    # print(upload.upload())
